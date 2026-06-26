@@ -35,7 +35,7 @@ const frameLabelEl = document.getElementById("frameLabelText");
 
 const frameCount = 241;
 const currentFrame = index => (
-  `hero_section_animation/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
+  `hero_section/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
 );
 
 const images = [];
@@ -93,7 +93,7 @@ if (canvas) {
       offsetX = (width - drawWidth) / 2;
     } else {
       drawHeight = width / imgRatio;
-      offsetY = (height - drawHeight) / 2;
+      offsetY = 0; // Pin to top so the head stays in frame
     }
 
     context.clearRect(0, 0, width, height);
