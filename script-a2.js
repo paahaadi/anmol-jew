@@ -25,91 +25,83 @@ document.addEventListener('click', (e) => {
 });
 
 /* ══════════════════════════════════════════════════════════
-   HERO — BRIDAL SCROLL FRAME SEQUENCER
-   The hero section is 100vh tall but has an additional
-   invisible "scroll space" below it.  As the user scrolls
-   through that space the frames cross-fade:
-     Frame 0: Full bridal look         (scroll 0 – 25%)
-     Frame 1: Necklace close-up        (scroll 25 – 50%)
-     Frame 2: Bangles close-up         (scroll 50 – 75%)
-     Frame 3: Earrings / pan shot      (scroll 75 – 100%)
-   After the scroll space ends, the hero snaps out and the
-   rest of the page scrolls normally.
+   HERO — BRIDAL SCROLL CINEMATIC (GSAP + CANVAS)
    ══════════════════════════════════════════════════════════ */
+gsap.registerPlugin(ScrollTrigger);
 
-const frames      = document.querySelectorAll('.hero-frame');
-const dots        = document.querySelectorAll('.frame-dot');
-const frameLabelEl= document.getElementById('frameLabelText');
-const heroSection = document.getElementById('hero');
+const canvas = document.getElementById("hero-canvas");
+const context = canvas ? canvas.getContext("2d") : null;
+const frameLabelEl = document.getElementById("frameLabelText");
 
-const frameLabels = [
-  'Full Bridal Look',
-  'Necklace Detail',
-  'Bangle Collection',
-  'Earrings & Maang Tikka'
-];
+const frameCount = 241;
+const currentFrame = index => (
+  `hero_section_animation/Anmol_Jeweller_Website_Animation_Frame_${(index + 1).toString().padStart(3, '0')}.jpg`
+);
 
-let currentFrame  = 0;
-let lastFrame     = -1;
+const images = [];
+const bridalSeq = { frame: 0 };
 
-function setFrame(idx) {
-  if (idx === lastFrame) return;
-  lastFrame = idx;
-
-  frames.forEach((f, i) => {
-    f.classList.toggle('active', i === idx);
-  });
-  dots.forEach((d, i) => {
-    d.classList.toggle('active', i === idx);
-  });
-  frameLabelEl.textContent = frameLabels[idx];
-}
-
-/* Dot click → jump to frame (also auto-advances) */
-dots.forEach((dot) => {
-  dot.addEventListener('click', () => {
-    const idx = parseInt(dot.dataset.frame);
-    setFrame(idx);
-    currentFrame = idx;
-  });
-});
-
-/* Scroll-driven frame change */
-function updateHeroFrameOnScroll() {
-  const heroH   = heroSection.offsetHeight;
-  const scrollY = window.scrollY;
-
-  // Determine progress within the hero viewport (0→1)
-  const pct = Math.min(1, Math.max(0, scrollY / (heroH * 0.8)));
-
-  let newFrame;
-  if      (pct < 0.25) newFrame = 0;
-  else if (pct < 0.50) newFrame = 1;
-  else if (pct < 0.75) newFrame = 2;
-  else                 newFrame = 3;
-
-  setFrame(newFrame);
-  currentFrame = newFrame;
-}
-
-window.addEventListener('scroll', updateHeroFrameOnScroll, { passive: true });
-
-/* Auto-play when not scrolling (every 3.5s) */
-let autoplay = setInterval(() => {
-  if (window.scrollY < 100) {  // only when user hasn't scrolled yet
-    currentFrame = (currentFrame + 1) % frames.length;
-    setFrame(currentFrame);
+if (canvas) {
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = currentFrame(i);
+    images.push(img);
   }
-}, 3500);
 
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    clearInterval(autoplay);
+  gsap.to(bridalSeq, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#hero-pin-wrapper",
+      start: "top top",
+      end: "+=3500", // longer scroll distance for smoother playback
+      scrub: 0.5,
+      pin: true
+    },
+    onUpdate: render
+  });
+
+  images[0].onload = render;
+
+  function render() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const img = images[bridalSeq.frame];
+    if (!img) return;
+    
+    // Update labels based on frame progress
+    if (bridalSeq.frame < 60) frameLabelEl.textContent = 'The Journey Begins';
+    else if (bridalSeq.frame < 120) frameLabelEl.textContent = 'Adorning Tradition';
+    else if (bridalSeq.frame < 180) frameLabelEl.textContent = 'The Golden Details';
+    else frameLabelEl.textContent = 'Full Bridal Look';
+    
+    // Cover the canvas properly without stretching
+    const canvasRatio = width / height;
+    const imgRatio = img.width / img.height;
+    
+    let drawWidth = width;
+    let drawHeight = height;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (imgRatio > canvasRatio) {
+      drawWidth = height * imgRatio;
+      offsetX = (width - drawWidth) / 2;
+    } else {
+      drawHeight = width / imgRatio;
+      offsetY = (height - drawHeight) / 2;
+    }
+
+    context.clearRect(0, 0, width, height);
+    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   }
-}, { passive: true, once: true });
 
-/* Initial frame */
-setFrame(0);
+  window.addEventListener("resize", render);
+}
 
 /* ── Scroll Reveal (Intersection Observer) ───────────────── */
 const revealObs = new IntersectionObserver((entries) => {
