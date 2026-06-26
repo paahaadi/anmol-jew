@@ -636,22 +636,30 @@ footer { background: var(--warm-white); border-top: 1px solid var(--border); }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  
+  /* Mobile Typography Tweaks */
+  .section-title, .hero-title { font-size: 2.2rem; }
+  .hero-tagline, .body-text, .hero-desc { font-size: 0.9rem; line-height: 1.6; }
+  .hero-eyebrow, .eyebrow { font-size: 0.65rem; }
+  .btn-primary, .btn-outline-gold { padding: 0.75rem 1.25rem; font-size: 0.7rem; }
+  
   .mascot-wrapper { transform: scale(0.85); transform-origin: bottom right; bottom: 0.5rem; right: 0.5rem; }
   .hero-frames { width: 100%; }
   .hero-content { 
-    position: absolute; width: calc(100% - 3rem); right: 1.5rem; left: 1.5rem; top: 50%; transform: translateY(-50%);
-    padding: 2.5rem 1.5rem; background: rgba(255,253,248,0.85);
+    position: absolute; width: calc(100% - 2rem); right: 1rem; left: 1rem; top: auto; bottom: 6.5rem; transform: none;
+    padding: 1.5rem 1.25rem; background: rgba(255,253,248,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     margin-top: 0; border-radius: 16px;
   }
   .hero-inner { max-width: 100%; }
   .frame-label { display: none; }
   .frame-dots { left: 50%; bottom: 2rem; }
+  .hero-scroll-hint { display: none; }
   
-  #about { min-height: 100vh; }
+  #about { min-height: 100vh; position: relative; }
   .about-text {
-    width: calc(100% - 3rem);
+    position: absolute; width: calc(100% - 2rem); right: 1rem; left: 1rem; top: auto; bottom: 6.5rem; height: auto;
     margin: 0 auto;
-    padding: 2.5rem 1.5rem; background: rgba(255,253,248,0.9);
+    padding: 1.5rem 1.25rem; background: rgba(255,253,248,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
     min-height: auto;
   }
