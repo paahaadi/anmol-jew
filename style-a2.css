@@ -377,19 +377,14 @@ section { padding: 6rem 0; }
 
 .cat-rail {
   display: flex; gap: 1.5rem;
-  /* width is set by JS once cards are cloned */
-  animation: railScroll 32s linear infinite;
-  will-change: transform;
-  cursor: grab;
   padding: 0.5rem 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
-.cat-rail:active { cursor: grabbing; }
-.cat-rail.paused,
-.cat-rail-wrap:hover .cat-rail { animation-play-state: paused; }
-
-@keyframes railScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }  /* exactly one set width — JS sets --rail-w */
+.cat-rail::-webkit-scrollbar {
+  display: none;
 }
 
 .cat-card {
@@ -415,8 +410,26 @@ section { padding: 6rem 0; }
 .cat-name { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
 .cat-desc-txt { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 
-/* Rail arrows — hidden for auto-scroll, still usable as speed controls */
-.rail-arrow { display: none; }
+/* Rail arrows */
+.rail-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  background: var(--bg-card);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 1.5rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+.rail-arrow:hover {
+  background: var(--gold); color: #fff;
+}
+.rail-prev { left: 0; }
+.rail-next { right: 0; }
 
 .cat-cta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; padding-top: 1rem; }
 
@@ -647,13 +660,15 @@ footer { background: var(--warm-white); border-top: 1px solid var(--border); }
   .hero-frames { width: 100%; }
   .hero-content { 
     position: absolute; width: calc(100% - 2rem); right: 1rem; left: 1rem; top: auto; bottom: 6.5rem; transform: none;
+    height: auto;
     padding: 1.5rem 1.25rem; background: rgba(255,253,248,0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     margin-top: 0; border-radius: 16px;
   }
   .hero-inner { max-width: 100%; }
   .frame-label { display: none; }
   .frame-dots { left: 50%; bottom: 2rem; }
-  .hero-scroll-hint { display: none; }
+  .hero-scroll-hint { display: none !important; }
+  .hero-trust { flex-wrap: wrap; white-space: normal; justify-content: center; }
   
   #about { min-height: 100vh; position: relative; }
   .about-text {

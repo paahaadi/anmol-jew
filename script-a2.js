@@ -155,28 +155,45 @@ const prevBtn  = document.getElementById('railPrev');
 const nextBtn  = document.getElementById('railNext');
 
 if (rail) {
-  const SCROLL_AMT = 320; // px per arrow click
+  // Clone items for infinite scroll effect
+  rail.innerHTML += rail.innerHTML;
 
-  prevBtn.addEventListener('click', () => {
-    rail.scrollBy({ left: -SCROLL_AMT, behavior: 'smooth' });
-  });
-  nextBtn.addEventListener('click', () => {
-    rail.scrollBy({ left: SCROLL_AMT, behavior: 'smooth' });
-  });
+  const SCROLL_AMT = 320;
 
-  /* Show/hide arrows */
-  function updateArrows() {
-    prevBtn.style.opacity = rail.scrollLeft <= 10 ? '0.3' : '1';
-    nextBtn.style.opacity = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 10 ? '0.3' : '1';
-    prevBtn.style.pointerEvents = rail.scrollLeft <= 10 ? 'none' : 'auto';
+  function smoothScrollBy(amount) {
+    rail.style.scrollBehavior = 'smooth';
+    rail.scrollLeft += amount;
+    setTimeout(() => rail.style.scrollBehavior = 'auto', 400);
   }
-  rail.addEventListener('scroll', updateArrows, { passive: true });
-  updateArrows();
+
+  prevBtn.addEventListener('click', () => smoothScrollBy(-SCROLL_AMT));
+  nextBtn.addEventListener('click', () => smoothScrollBy(SCROLL_AMT));
+
+  /* Infinite Auto-Scroll */
+  let isInteracting = false;
+  const scrollSpeed = 1.5; // pixels per frame
+  
+  rail.parentElement.addEventListener('mouseenter', () => isInteracting = true);
+  rail.parentElement.addEventListener('mouseleave', () => isInteracting = false);
+  rail.addEventListener('touchstart', () => isInteracting = true, {passive: true});
+  rail.addEventListener('touchend', () => { setTimeout(() => isInteracting = false, 1000); }, {passive: true});
+
+  function autoScroll() {
+    if (!isInteracting && rail.style.scrollBehavior !== 'smooth') {
+      rail.scrollLeft += scrollSpeed;
+      if (rail.scrollLeft >= rail.scrollWidth / 2) {
+        rail.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  requestAnimationFrame(autoScroll);
 
   /* Drag-to-scroll */
   let isDragging = false;
   let startX, startScroll;
   rail.addEventListener('mousedown', (e) => {
+    isInteracting = true;
     isDragging = true; startX = e.pageX; startScroll = rail.scrollLeft;
     rail.style.userSelect = 'none';
   });
@@ -184,8 +201,8 @@ if (rail) {
     if (!isDragging) return;
     rail.scrollLeft = startScroll - (e.pageX - startX);
   });
-  rail.addEventListener('mouseup',   () => { isDragging = false; rail.style.userSelect = ''; });
-  rail.addEventListener('mouseleave',() => { isDragging = false; rail.style.userSelect = ''; });
+  window.addEventListener('mouseup', () => { isDragging = false; rail.style.userSelect = ''; });
+  rail.addEventListener('mouseleave', () => { isDragging = false; rail.style.userSelect = ''; });
 
   /* Card hover tilt */
   document.querySelectorAll('.cat-card, .3d-card').forEach(card => {
