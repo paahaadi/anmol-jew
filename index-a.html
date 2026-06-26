@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Anmol Jewellers – Sundar Nagar | Hallmark Gold & Silver</title>
+  <meta name="description" content="Anmol Jewellers – Sunder Nagar's trusted destination for certified HUID Hallmark Gold, Silver & Diamond jewellery. 5.0★ Google rated."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style-a2.css"/>
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">अनमोल <span>Jewellers</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#catalogue">Collections</a></li>
+        <li><a href="#trust">Why Us</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#booking" class="nav-cta">Book Appointment</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" onclick="closeMobile()">About</a></li>
+      <li><a href="#catalogue" onclick="closeMobile()">Collections</a></li>
+      <li><a href="#trust" onclick="closeMobile()">Why Us</a></li>
+      <li><a href="#reviews" onclick="closeMobile()">Reviews</a></li>
+      <li><a href="#booking" onclick="closeMobile()" class="nav-cta">Book Appointment</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══ FLOATING MASCOT / CHATBOT TRIGGER ═══ -->
+  <div class="mascot-wrapper" id="mascot">
+    <button class="mascot-trigger" id="chatTrigger" aria-label="Open Chat">
+      <img src="assets/gold_coin_mascot.png" alt="Anmol Jewellers Chat" class="mascot-img"/>
+    </button>
+    <div class="mascot-tooltip">Need help? Chat with us!</div>
+  </div>
+
+  <!-- ═══ CHATBOX UI ═══ -->
+  <div class="chatbox" id="chatbox">
+    <div class="chat-header">
+      <img src="assets/gold_coin_mascot.png" alt="Anmol Bot" class="chat-avatar"/>
+      <div class="chat-header-info">
+        <span class="chat-name">Anmol Assistant</span>
+        <span class="chat-status">Online • Replies instantly</span>
+      </div>
+      <button class="chat-close-btn" id="chatClose" aria-label="Close Chat">✕</button>
+    </div>
+    
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        <div class="msg-bubble">Namaste! Welcome to Anmol Jewellers, Sundar Nagar. 🌟 How can I assist you today?</div>
+        <div class="msg-time">Just now</div>
+      </div>
+    </div>
+    
+    <div class="quick-replies">
+      <button class="qr-chip">Where are you located?</button>
+      <button class="qr-chip">Do you sell Hallmark gold?</button>
+      <button class="qr-chip">Can I book an appointment?</button>
+    </div>
+    
+    <div class="chat-input-bar">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..."/>
+      <button class="chat-send-btn" id="chatSend" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO — BRIDAL SCROLL CINEMATIC
+       4 frames cross-fade driven by scroll position
+       ═══════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <!-- Frame stack — all 4 images stacked, opacity controlled by scroll JS -->
+    <div class="hero-frames">
+      <div class="hero-frame active" id="frame0">
+        <img src="assets/bridal_hero_full.png" alt="Indian Bridal Jewellery – Anmol Jewellers"/>
+      </div>
+      <div class="hero-frame" id="frame1">
+        <img src="assets/bridal_frame_2.png" alt="Bridal Necklace Detail – Anmol Jewellers"/>
+      </div>
+      <div class="hero-frame" id="frame2">
+        <img src="assets/bridal_frame_3.png" alt="Bridal Bangles – Anmol Jewellers"/>
+      </div>
+      <div class="hero-frame" id="frame3">
+        <img src="assets/bridal_frame_4.png" alt="Bridal Earrings – Anmol Jewellers"/>
+      </div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Frame label — updates as scroll changes -->
+    <div class="frame-label" id="frameLabel">
+      <span class="frame-label-dot"></span>
+      <span id="frameLabelText">Full Bridal Look</span>
+    </div>
+
+    <!-- Scroll indicator dots -->
+    <div class="frame-dots">
+      <button class="frame-dot active" data-frame="0" aria-label="Frame 1"></button>
+      <button class="frame-dot" data-frame="1" aria-label="Frame 2"></button>
+      <button class="frame-dot" data-frame="2" aria-label="Frame 3"></button>
+      <button class="frame-dot" data-frame="3" aria-label="Frame 4"></button>
+    </div>
+
+    <!-- Left panel — text content -->
+    <div class="hero-content">
+      <div class="hero-inner">
+        <p class="hero-eyebrow reveal">Hallmark · HUID Certified · Sundar Nagar, HP</p>
+        <h1 class="hero-title reveal">
+          <span class="hero-hindi">अनमोल</span>
+          <em class="hero-gold">Jewellers</em>
+        </h1>
+        <p class="hero-sub reveal">A Symbol of Trust &amp; Satisfaction</p>
+        <p class="hero-body reveal">Timeless gold, silver &amp; diamond pieces<br/>crafted for the hearts of Himachal Pradesh.</p>
+        <div class="hero-actions reveal">
+          <a href="#booking" class="btn-primary" id="hero-book-btn">Book Appointment</a>
+          <a href="#catalogue" class="btn-outline-gold" id="hero-explore-btn">Explore Collections</a>
+        </div>
+        <div class="hero-trust reveal">
+          <div class="trust-badge">⭐ 5.0 Google Rating</div>
+          <div class="trust-badge">🏅 100% HUID Certified</div>
+          <div class="trust-badge">💎 Hallmark Gold</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="hero-scroll-hint">
+      <span>Scroll to Explore</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span>✦ Gold Jewellery</span><span>✦ Silver Jewellery</span><span>✦ Diamond Jewellery</span>
+      <span>✦ HUID Certified</span><span>✦ Hallmark Assured</span><span>✦ Custom Designs</span>
+      <span>✦ Jadau Work</span><span>✦ Bridal Sets</span><span>✦ Gold Watches</span>
+      <span>✦ Silver Pendants</span><span>✦ Gold Jewellery</span><span>✦ Silver Jewellery</span>
+      <span>✦ Diamond Jewellery</span><span>✦ HUID Certified</span><span>✦ Hallmark Assured</span>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <p class="eyebrow">Our Story</p>
+          <h2 class="section-title">Sundar Nagar's Most<br/><em>Trusted Jeweller</em></h2>
+          <p class="body-text">Founded in 2021 in Bhojpur, Sundar Nagar, Anmol Jewellers was born to bring every family certified, genuine jewellery with the warmth of a trusted goldsmith.</p>
+          <p class="body-text">Every piece carries a Bureau of Indian Standards <strong>Hallmark</strong> and a unique <strong>HUID</strong> — your assurance of purity and authenticity.</p>
+          <div class="about-stats">
+            <div class="stat"><span class="sn">5.0★</span><span class="sl">Google Rating</span></div>
+            <div class="stat"><span class="sn">346+</span><span class="sl">Facebook Fans</span></div>
+            <div class="stat"><span class="sn">100%</span><span class="sl">HUID Certified</span></div>
+            <div class="stat"><span class="sn">2021</span><span class="sl">Established</span></div>
+          </div>
+        </div>
+        <div class="about-visual reveal-right">
+          <div class="about-card">
+            <img src="assets/bridal_frame_2.png" alt="Bridal jewellery by Anmol Jewellers"/>
+            <div class="about-badge">
+              <span class="ab-t">Since 2021</span>
+              <span class="ab-s">Bhojpur, Sundar Nagar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CATALOGUE — HORIZONTAL SCROLL CAROUSEL
+       ═══════════════════════════════════════════════════════ -->
+  <section id="catalogue">
+    <div class="catalogue-header reveal">
+      <div class="container">
+        <p class="eyebrow">Our Collections</p>
+        <h2 class="section-title">A Catalogue of<br/><em>Timeless Pieces</em></h2>
+        <p class="cat-desc">Swipe to browse our curated jewellery collection — crafted for every occasion.</p>
+      </div>
+    </div>
+
+    <!-- Scroll rail -->
+    <div class="cat-rail-wrap">
+      <button class="rail-arrow rail-prev" id="railPrev" aria-label="Previous">‹</button>
+      <div class="cat-rail" id="catRail">
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_necklace.png" alt="Jadau Rana Haar"/>
+            <div class="cat-price-tag">On Request</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Necklaces</p>
+            <h3 class="cat-name">Jadau Rana Haar</h3>
+            <p class="cat-desc-txt">Traditional Jadau necklace with rubies, emeralds &amp; pearls.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_pendant_set.png" alt="Pendant & Earring Set"/>
+            <div class="cat-price-tag">On Request</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Sets</p>
+            <h3 class="cat-name">Pendant &amp; Earring Set</h3>
+            <p class="cat-desc-txt">Matched gold kundan set with Jhumka earrings &amp; pearl drops.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_bangles.png" alt="Gold Jadau Bangles"/>
+            <div class="cat-price-tag">₹1,80,000+</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Bangles</p>
+            <h3 class="cat-name">Gold Jadau Bangles</h3>
+            <p class="cat-desc-txt">Ornate pair of Jadau bangles with rubies, emeralds &amp; diamonds.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_ring.png" alt="Ladies Gold Ring"/>
+            <div class="cat-price-tag">₹3,700+</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Rings</p>
+            <h3 class="cat-name">Ladies Gold Ring</h3>
+            <p class="cat-desc-txt">Ruby &amp; kundan cocktail ring in 22K gold. Timeless elegance.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_watch.png" alt="Gold Watch"/>
+            <div class="cat-price-tag">On Request</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Watches</p>
+            <h3 class="cat-name">Gold Filigree Watch</h3>
+            <p class="cat-desc-txt">Hand-crafted gold wristwatch with intricate filigree bracelet.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_bracelet.png" alt="Gents Gold Bracelet"/>
+            <div class="cat-price-tag">On Request</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Men's</p>
+            <h3 class="cat-name">Gents Gold Bracelet</h3>
+            <p class="cat-desc-txt">Bold rope-chain gold bracelet with diamond-studded clasp.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/prod_silver_set.png" alt="Italian Silver Set"/>
+            <div class="cat-price-tag">₹9,200</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Silver</p>
+            <h3 class="cat-name">Italian Silver Set</h3>
+            <p class="cat-desc-txt">925 sterling silver modern infinity necklace &amp; earring set.</p>
+          </div>
+        </article>
+
+        <article class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="assets/bridal_frame_3.png" alt="Bridal Full Look"/>
+            <div class="cat-price-tag">Bridal Package</div>
+          </div>
+          <div class="cat-info">
+            <p class="cat-cat">Bridal</p>
+            <h3 class="cat-name">Complete Bridal Set</h3>
+            <p class="cat-desc-txt">Full bridal jewellery package — necklace, bangles, earrings, tikka &amp; ring.</p>
+          </div>
+        </article>
+
+      </div>
+      <button class="rail-arrow rail-next" id="railNext" aria-label="Next">›</button>
+    </div>
+
+    <!-- Enquire CTA below carousel -->
+    <div class="cat-cta reveal">
+      <a href="#booking" class="btn-primary">Enquire About a Piece</a>
+      <a href="https://wa.me/918628911161" target="_blank" rel="noopener" class="btn-whatsapp" id="cat-whatsapp-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ TRUST ═══ -->
+  <section id="trust">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Why Anmol Jewellers</p>
+        <h2 class="section-title">Trust Forged in<br/><em>Gold &amp; Honesty</em></h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card 3d-card reveal-up" style="--d:0ms">
+          <img src="assets/trust_huid.png" class="tc-bg" alt="HUID Certified"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">🏅</div>
+            <h3>100% HUID Certified</h3>
+            <p>Every gold piece carries a unique HUID code — traceable, tamper-proof and BIS compliant.</p>
+          </div>
+        </div>
+        <div class="trust-card 3d-card reveal-up" style="--d:100ms">
+          <img src="assets/trust_pricing.png" class="tc-bg" alt="Transparent Pricing"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">⚖️</div>
+            <h3>Transparent Pricing</h3>
+            <p>No hidden charges. No inflated rates. Honest jewellery for honest families.</p>
+          </div>
+        </div>
+        <div class="trust-card 3d-card reveal-up" style="--d:200ms">
+          <img src="assets/prod_necklace.png" class="tc-bg" alt="Hallmark Assured"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">✨</div>
+            <h3>Hallmark Assured</h3>
+            <p>All gold Hallmarked by BIS — India's highest purity guarantee.</p>
+          </div>
+        </div>
+        <div class="trust-card 3d-card reveal-up" style="--d:0ms">
+          <img src="assets/prod_ring.png" class="tc-bg" alt="Custom Designs"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">🎨</div>
+            <h3>Custom Designs</h3>
+            <p>Bring your vision. Our goldsmiths craft bespoke pieces tailored to your taste.</p>
+          </div>
+        </div>
+        <div class="trust-card 3d-card reveal-up" style="--d:100ms">
+          <img src="assets/bridal_frame_2.png" class="tc-bg" alt="5 Star Service"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">🤝</div>
+            <h3>5.0 Star Service</h3>
+            <p>A perfect Google rating earned through genuine care and expert guidance.</p>
+          </div>
+        </div>
+        <div class="trust-card 3d-card reveal-up" style="--d:200ms">
+          <img src="assets/prod_bangles.png" class="tc-bg" alt="Rooted Locally"/>
+          <div class="tc-overlay"></div>
+          <div class="tc-content">
+            <div class="ti">📍</div>
+            <h3>Rooted Locally</h3>
+            <p>Your community jeweller in Sundar Nagar since 2021 — always nearby.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REVIEWS ═══ -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Customer Stories</p>
+        <h2 class="section-title">5.0 ★ on Google —<br/><em>Every Single Review</em></h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal-up" style="--d:0ms">
+          <div class="r-stars">★★★★★</div>
+          <p class="r-text">"Also, the behaviour and services of the owner &amp; staff is really nice."</p>
+          <div class="r-author"><div class="r-av">SK</div><div><p class="r-name">Shama Khan</p><p class="r-src">Google Review</p></div></div>
+        </div>
+        <div class="review-card reveal-up" style="--d:100ms">
+          <div class="r-stars">★★★★★</div>
+          <p class="r-text">"Best service provided by them — genuine products with genuine prices."</p>
+          <div class="r-author"><div class="r-av">RC</div><div><p class="r-name">Rahul Chauhan</p><p class="r-src">Google Review</p></div></div>
+        </div>
+        <div class="review-card reveal-up" style="--d:200ms">
+          <div class="r-stars">★★★★★</div>
+          <p class="r-text">"Best quality of products with genuine price. New designs available here."</p>
+          <div class="r-author"><div class="r-av">RS</div><div><p class="r-name">Rohit Setia</p><p class="r-src">Google Review</p></div></div>
+        </div>
+      </div>
+      <div class="reviews-cta reveal">
+        <a href="https://share.google/pyh4iiJxtoXl5Qsnb" target="_blank" rel="noopener" class="btn-outline-dark" id="google-reviews-btn">Read All Reviews on Google ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOOKING ═══ -->
+  <section id="booking">
+    <div class="container">
+      <div class="booking-grid">
+        <div class="booking-info reveal-left">
+          <p class="eyebrow">Visit Us</p>
+          <h2 class="section-title">Book Your<br/><em>Private Appointment</em></h2>
+          <p class="body-text">Experience jewellery the way it should be — with undivided attention, expert guidance, and time to choose what speaks to you.</p>
+          <div class="contact-list">
+            <a href="tel:+918628911161" class="cl-item" id="phone-cta-link">
+              <span class="cl-icon">📞</span>
+              <div><span class="cl-label">Call Us</span><span class="cl-val">+91 86289 11161</span></div>
+            </a>
+            <a href="https://maps.app.goo.gl/Bhojpur-Sunder-Nagar" target="_blank" rel="noopener" class="cl-item" id="address-map-link">
+              <span class="cl-icon">📍</span>
+              <div><span class="cl-label">Find Us</span><span class="cl-val">Bhojpur, Sundar Nagar, HP 175002</span></div>
+            </a>
+            <div class="cl-item">
+              <span class="cl-icon">🕐</span>
+              <div><span class="cl-label">Store Hours</span><span class="cl-val">9:00 AM – 8:00 PM</span></div>
+            </div>
+          </div>
+          <div class="social-section">
+            <p class="social-label">Follow Our Journey</p>
+            <div class="social-row">
+              <a href="https://www.facebook.com/AnmolJewellersSundernagar/" target="_blank" rel="noopener" class="soc-btn" id="facebook-btn" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Facebook</span>
+              </a>
+              <a href="https://www.instagram.com/anmol.jewellers.sundernagar/" target="_blank" rel="noopener" class="soc-btn" id="instagram-btn" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>Instagram</span>
+              </a>
+              <a href="https://wa.me/918628911161" target="_blank" rel="noopener" class="soc-btn soc-wa" id="whatsapp-social-btn" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="booking-form-wrap reveal-right">
+          <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
+            <h3 class="form-title">Request an Appointment</h3>
+            <div class="fg"><label for="name">Full Name *</label><input type="text" id="name" name="name" placeholder="Your Name" required/></div>
+            <div class="form-row">
+              <div class="fg"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required/></div>
+              <div class="fg"><label for="date">Preferred Date *</label><input type="date" id="date" name="date" required/></div>
+            </div>
+            <div class="fg"><label for="interest">Interested In *</label>
+              <select id="interest" name="interest" required>
+                <option value="">Select Category</option>
+                <option>Gold Jewellery</option><option>Silver Jewellery</option>
+                <option>Diamond Jewellery</option><option>Bridal / Wedding Set</option>
+                <option>Custom / Bespoke Design</option><option>Jadau Work</option>
+                <option>Watch</option><option>Men's Jewellery</option><option>Other</option>
+              </select>
+            </div>
+            <div class="fg"><label for="message">Message (optional)</label><textarea id="message" name="message" placeholder="Tell us more about what you're looking for…" rows="3"></textarea></div>
+            <button type="submit" class="btn-primary full-w" id="submitBtn">Send Request via WhatsApp</button>
+            <p class="form-note">Or call directly: <a href="tel:+918628911161">+91 86289 11161</a></p>
+          </form>
+          <div class="form-success" id="formSuccess" style="display:none">
+            <div class="success-icon">✦</div>
+            <h3>Thank You!</h3>
+            <p>Your appointment request has been received. Our team will contact you within 24 hours.</p>
+            <a href="tel:+918628911161" class="btn-primary">Call Now: +91 86289 11161</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT / MAP ═══ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">Find Us</p>
+        <h2 class="section-title">Come Visit Our<br/><em>Showroom</em></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="map-wrap reveal-left">
+          <a href="https://maps.google.com/?q=Anmol+Jewellers,+Bhojpur,+Sundar+Nagar,+Himachal+Pradesh+175002" target="_blank" class="map-placeholder-link">
+            <div class="map-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="map-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>View on Google Maps</span>
+              <small>Bhojpur, Sundar Nagar, Himachal Pradesh</small>
+            </div>
+          </a>
+        </div>
+        <div class="contact-panel reveal-right">
+          <div class="contact-card">
+            <h3>Anmol Jewellers</h3>
+            <p class="c-addr">Bhojpur, Sundar Nagar<br/>Himachal Pradesh — 175002</p>
+            <div class="c-btns">
+              <a href="tel:+918628911161" class="btn-primary" id="call-primary-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                +91 86289 11161
+              </a>
+              <a href="https://wa.me/918628911161" target="_blank" rel="noopener" class="btn-whatsapp" id="wa-contact-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                WhatsApp Us
+              </a>
+              <a href="https://maps.google.com/?q=Bhojpur,Sundar+Nagar,Himachal+Pradesh+175002" target="_blank" rel="noopener" class="btn-outline-dark" id="directions-btn">
+                📍 Get Directions
+              </a>
+            </div>
+            <div class="hours-box">
+              <p class="h-title">Store Hours</p>
+              <p class="h-time">9:00 AM – 8:00 PM</p>
+              <p class="h-note">Monday – Saturday · Call to confirm holiday hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner container">
+      <div class="f-brand">
+        <p class="f-logo">अनमोल Jewellers</p>
+        <p class="f-tag">A Symbol of Trust &amp; Satisfaction</p>
+        <p class="f-addr">Bhojpur, Sundar Nagar, Himachal Pradesh 175002</p>
+        <div class="f-soc">
+          <a href="https://www.facebook.com/AnmolJewellersSundernagar/" target="_blank" rel="noopener" aria-label="Facebook" id="footer-fb-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/anmol.jewellers.sundernagar/" target="_blank" rel="noopener" aria-label="Instagram" id="footer-ig-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://wa.me/918628911161" target="_blank" rel="noopener" aria-label="WhatsApp" id="footer-wa-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-links">
+        <p class="f-col-title">Quick Links</p>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#catalogue">Collections</a></li>
+          <li><a href="#trust">Why Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#booking">Book Appointment</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="f-contact">
+        <p class="f-col-title">Contact</p>
+        <a href="tel:+918628911161" class="f-phone">+91 86289 11161</a>
+        <a href="https://maps.google.com/?q=Bhojpur,Sundar+Nagar,Himachal+Pradesh+175002" target="_blank" rel="noopener" class="f-maps" id="footer-maps-btn">📍 View on Google Maps</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2024 Anmol Jewellers, Sundar Nagar. All rights reserved.</p>
+        <p class="f-cert">🏅 BIS Hallmarked · HUID Certified · Trusted Since 2021</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script-a2.js"></script>
+</body>
+</html>

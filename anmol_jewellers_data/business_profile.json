@@ -1,0 +1,39 @@
+{
+  "business_name": "Anmol Jewellers",
+  "business_name_local": "अनमोल ज्वेलर्स",
+  "category": "Goldsmith / Jewellery store",
+  "description": "Hallmark Gold, Silver and Diamond jewellery shop. Described on its Facebook page as 'a symbol of trust and satisfaction'.",
+  "address": {
+    "locality": "Bhojpur",
+    "city": "Sundar Nagar",
+    "state": "Himachal Pradesh",
+    "postal_code": "175002",
+    "country": "India",
+    "plus_code": "GVMQ+2R Sundar Nagar, Himachal Pradesh, India"
+  },
+  "contact": {
+    "phone": "+91 86289 11161",
+    "email": null,
+    "website": null
+  },
+  "ratings": {
+    "google_rating": 5.0,
+    "google_review_count": "unknown (not publicly exposed; listing appears sparse)",
+    "facebook_likes": 346
+  },
+  "hours": {
+    "note": "Only Thursday confirmed via Google listing; full week not publicly exposed.",
+    "thursday": "9:00 AM - 8:00 PM"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/AnmolJewellersSundernagar/",
+    "instagram": "https://www.instagram.com/anmol.jewellers.sundernagar/",
+    "instagram_handle": "@anmol.jewellers.sundernagar",
+    "instagram_note": "Account confirmed to exist but exposes no public stats/posts to anonymous access; content requires an authenticated Instagram scraper.",
+    "google_maps_share": "https://share.google/pyh4iiJxtoXl5Qsnb"
+  },
+  "products": [],
+  "images": [],
+  "data_collected_on": "2026-06-26",
+  "data_provenance": "Google Maps listing (verified). Facebook & Instagram content NOT extracted - see DATA_GAPS.md"
+}

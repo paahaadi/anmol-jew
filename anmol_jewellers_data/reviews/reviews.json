@@ -1,0 +1,7 @@
+{
+  "status": "rating_only",
+  "google_rating": 5.0,
+  "google_review_count": "not exposed to anonymous access",
+  "note": "Confirmed 2026-06-26: Google shows a 5.0 rating but does not expose individual review text or the review count to anonymous fetches. Review bodies require an authenticated Google Maps scraper.",
+  "reviews": []
+}
