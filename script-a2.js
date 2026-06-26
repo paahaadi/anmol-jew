@@ -35,7 +35,7 @@ const frameLabelEl = document.getElementById("frameLabelText");
 
 const frameCount = 241;
 const currentFrame = index => (
-  `hero_section_animation/Anmol_Jeweller_Website_Animation_Frame_${(index + 1).toString().padStart(3, '0')}.jpg`
+  `hero_section_animation/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
 );
 
 const images = [];
