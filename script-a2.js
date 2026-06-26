@@ -42,11 +42,37 @@ const images = [];
 const bridalSeq = { frame: 0 };
 
 if (canvas) {
+  // Pre-allocate array
   for (let i = 0; i < frameCount; i++) {
-    const img = new Image();
-    img.src = currentFrame(i);
-    images.push(img);
+    images.push(null);
   }
+  
+  // Load first frame immediately to unblock rendering
+  const firstImg = new Image();
+  firstImg.src = currentFrame(0);
+  images[0] = firstImg;
+
+  // Sequentially load the rest in the background
+  let currentLoadIndex = 1;
+  function loadNextFrame() {
+    if (currentLoadIndex >= frameCount) return;
+    const img = new Image();
+    img.src = currentFrame(currentLoadIndex);
+    img.onload = () => {
+      images[currentLoadIndex] = img;
+      currentLoadIndex++;
+      loadNextFrame(); // Chain the next load
+    };
+    img.onerror = () => {
+      currentLoadIndex++;
+      loadNextFrame(); // Skip errors and continue
+    };
+  }
+
+  firstImg.onload = () => {
+    render(); // Render first frame immediately
+    loadNextFrame(); // Start sequential loading
+  };
 
   gsap.to(bridalSeq, {
     frame: frameCount - 1,
@@ -61,8 +87,6 @@ if (canvas) {
     },
     onUpdate: render
   });
-
-  images[0].onload = render;
 
   function render() {
     const width = window.innerWidth;
