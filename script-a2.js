@@ -52,26 +52,41 @@ if (canvas) {
   firstImg.src = currentFrame(0);
   images[0] = firstImg;
 
-  // Sequentially load the rest in the background
+  // Parallel chunked loading to eliminate latency overhead
+  const CHUNK_SIZE = 20;
   let currentLoadIndex = 1;
-  function loadNextFrame() {
+
+  function loadNextChunk() {
     if (currentLoadIndex >= frameCount) return;
-    const img = new Image();
-    img.src = currentFrame(currentLoadIndex);
-    img.onload = () => {
-      images[currentLoadIndex] = img;
-      currentLoadIndex++;
-      loadNextFrame(); // Chain the next load
-    };
-    img.onerror = () => {
-      currentLoadIndex++;
-      loadNextFrame(); // Skip errors and continue
-    };
+    
+    let loadedInChunk = 0;
+    let chunkEnd = Math.min(currentLoadIndex + CHUNK_SIZE, frameCount);
+    let amountToLoad = chunkEnd - currentLoadIndex;
+
+    for (let i = currentLoadIndex; i < chunkEnd; i++) {
+      const idx = i; // capture in closure
+      const img = new Image();
+      img.src = currentFrame(idx);
+      
+      const onComplete = () => {
+        loadedInChunk++;
+        if (loadedInChunk === amountToLoad) {
+          currentLoadIndex = chunkEnd;
+          loadNextChunk();
+        }
+      };
+      
+      img.onload = () => {
+        images[idx] = img;
+        onComplete();
+      };
+      img.onerror = onComplete; // Skip errors and continue
+    }
   }
 
   firstImg.onload = () => {
     render(); // Render first frame immediately
-    loadNextFrame(); // Start sequential loading
+    loadNextChunk(); // Start parallel chunked loading
   };
 
   gsap.to(bridalSeq, {
